@@ -1,0 +1,33 @@
+server {
+    listen        443;
+    server_name example.com;
+    root           /var/www;
+    
+    ssl on;
+    ssl_certificate      /etc/nginx/eid/server.crt;
+    ssl_certificate_key  /etc/nginx/eid/server.key;
+    ssl_client_certificate /etc/nginx/eid/ca.crt;
+    
+    # Does not work for some reason
+    #ssl_crl /etc/nginx/eid/crl/ca.crl;
+
+    ssl_verify_depth 3;
+    ssl_verify_client optional;    
+    
+    location / {
+        index index.php index.html;
+        try_files $uri $uri/ =404; 
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param SSL_CLIENT_VERIFY $ssl_client_verify;
+        fastcgi_param SSL_CLIENT_S_DN $ssl_client_s_dn;
+        include fastcgi_params;
+    }
+}
+

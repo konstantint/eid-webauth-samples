@@ -1,0 +1,11 @@
+html
+    head
+        title ID card sample application
+    body
+        p Hello, #{user}!
+        if user == 'anonymous'
+            a(href="/login") Login
+        else
+            a(href="/logout") Logout
+        if flash
+            p #{flash}
