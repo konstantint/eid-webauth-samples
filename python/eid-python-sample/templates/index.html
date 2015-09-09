@@ -1,0 +1,16 @@
+<html>
+    <body>
+        {% if user %}
+            Hello, {{user}}! <a href="/logout">Logout</a>
+        {% else %}
+            Hello, anonymous! <a href="/login">Login</a>
+        {% endif %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </body>
+</html>
