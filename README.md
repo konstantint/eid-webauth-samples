@@ -176,6 +176,7 @@ The remaining part of this project contains several sample applications which sh
 * `nginx`: Nginx does not allow to configure client authentication requirements on a per-directory basis (it is either the whole server or nothing). Because of that Nginx is not a viable choice for ID card authentication, but there is a sample for the curious none the less.
 * `node`: NodeJS makes it possible to create a set up similar to the one with Apache, except for two differences. Firstly, CRL support in Node seems to be incompatible with what is necessary for ID cards (also, you could not reload CRLs without restarting the server). Thirdly, it is impossible to deny SSL verification once a handshake was established - this functionality is not crucial, but could have been used as a hack to enable "logout" for Chrome.
 * `python`: the standard solution for Python webapps is to have an Apache frontend handle SSL authentication. 
+* `j2ee`: J2EE containers seem to suffer from the same problem as Nginx -- they easily let you configure client certificates for the whole site. It should in principle be possible to create a more granular setup with only parts of the site requiring certificates, but this seems to be tricky.
 
 ## License
 
