@@ -160,7 +160,7 @@ In practice, due to [this Apache bug](https://bz.apache.org/bugzilla/show_bug.cg
 
 #### LDAP
 
-Another option for verifying certificate validity is to query the certification centre's [LDAP](https://www.sk.ee/en/repository/ldap/) database. Ideally it should only contain data about the currently valid certificates. The benefit of this approach is that it is free and, similarly to OCSP, results in to date validity status confirmation. The main drawback is the "unofficial" status of this method. Namely, the certification centre have not taken any formal obligations nor given any guarantees that such usage of the LDAP service is valid, that the certificates in LDAP would always be up to date or that the service would always be accessible.
+Another option for verifying certificate validity is to query the certification centre's [LDAP](https://www.sk.ee/en/repository/ldap/) database. Ideally it should only contain data about the currently valid certificates. The benefit of this approach is that it is free and, similarly to OCSP, results in to date validity status confirmation. The main drawback is the "unofficial" status of this method. Namely, the certification centre have not taken any formal obligations nor given any guarantees that such usage of the LDAP service is valid, that the certificates in LDAP would always be up to date or that the service would always be accessible. Example code is provided in `apache/www/ldap.php`.
 
 ### Login/logout
 
