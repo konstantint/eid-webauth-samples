@@ -40,7 +40,7 @@ The SSL protocol allows to use the same mechanism to authenticate the client. Th
 
 ID-card authentication is nothing more than requesting (on the server side), providing (on the client side) and accepting (on the server side again) the corresponding certificate from the smart card during the SSL handshake phase. As SSL is a transport-level protocol, in most web application platforms the details of this handshake are usually not under control of the web application and have to be configured at the server level.
 
-In the following we describe the steps needed to set up the server along with example applications in PHP, Python and NodeJS. In addition we provide example setups in the subdirectories of this repository packaged as docker containers. See the README in the corresponding directories.
+In the following we describe the steps needed to set up the server along with example applications in PHP, NodeJS, Python and Java. In addition we provide example setups in the subdirectories of this repository packaged as docker containers. See the README in the corresponding directories.
 
 Note that the examples and sample code are only meant as initial guidelines. Do not copy those blindly and make sure you understand all the security implications of particular set up options for your project. In particular, please take time to read through the following paper before pushing your application into production:
 
@@ -158,6 +158,10 @@ In theory, you should be able to enable OCSP by simply configuring the webserver
 
 In practice, due to [this Apache bug](https://bz.apache.org/bugzilla/show_bug.cgi?id=46037) and the particularities of eID OCSP service, this will not work. Instead, you will need to implement OCSP checks at the application level. Starter code, illustrating how this could be done via openssl is provided in `apache/www/ocsp.php`.
 
+#### LDAP
+
+Another option for verifying certificate validity is to query the certification centre's [LDAP](https://www.sk.ee/en/repository/ldap/) database. Ideally it should only contain data about the currently valid certificates. The benefit of this approach is that it is free and, similarly to OCSP, results in to date validity status confirmation. The main drawback is the "unofficial" status of this method. Namely, the certification centre have not taken any formal obligations nor given any guarantees that such usage of the LDAP service is valid, that the certificates in LDAP would always be up to date or that the service would always be accessible.
+
 ### Login/logout
 
 The SSL handshake is usually not under control of the application. Besides that, there are currently no standards, dictating how could the browser be forced to "forget" the authenticated user (although [some work is ongoing](http://html5.creation.net/webcrypto-api/)). Because of that, implementing convenient login/logout functionality in a cross-browser manner upon SSL client authentication [can be tricky](http://stackoverflow.com/questions/10487205/https-client-certificate-logout-relogin), if not impossible. This project does not provide a bulletproof solution. Indeed, most applications out there seem to ignore the problem whatsoever and are notorious for requiring browser (and sometimes even computer) restarts when you need to re-authenticate to them with a different ID card or when your first authentication attempt failed and you want to retry. Consider the example code in `apache/login`.
@@ -172,11 +176,11 @@ Obviously, for the authentication process to work the user must install appropri
 
 The remaining part of this project contains several sample applications which should help you better understand the concepts above. See the `README` files in the corresponding subdirectories for further guidance.
 
-* `apache`: probably the most common option for ID-card authentication platform.
-* `nginx`: Nginx does not allow to configure client authentication requirements on a per-directory basis (it is either the whole server or nothing). Because of that Nginx is not a viable choice for ID card authentication, but there is a sample for the curious none the less.
+* `apache`: Apache is probably the most common option for ID-card authentication platform. This example is based on PHP but any other language could be used similarly if served via CGI. PHP implementations of application-level OCSP and LDAP validation are demonstrated.
+* `nginx`: Nginx does not allow to configure client authentication requirements on a per-directory basis (it is either the whole server or nothing). Because of that Nginx is not a viable choice for ID card authentication, but there is a tiny PHP-based sample for the curious none the less.
 * `node`: NodeJS makes it possible to create a set up similar to the one with Apache, except for two differences. Firstly, CRL support in Node seems to be incompatible with what is necessary for ID cards (also, you could not reload CRLs without restarting the server). Secondly, it is impossible to deny SSL verification once a handshake was established - this functionality is not crucial, but could have been used as a hack to enable "logout" for Chrome.
-* `python`: the standard solution for WSGI-based Python webapps is to have an Apache frontend handle SSL authentication. 
-* `j2ee`: J2EE containers seem to suffer from the same problem as Nginx -- they easily let you configure client certificates for the whole site. It should in principle be possible to create a more granular setup with only parts of the site requiring certificates, but this seems to be tricky.
+* `python`: the standard solution for WSGI-based Python webapps is to have an Apache frontend handle SSL authentication.
+* `j2ee`: Java enterprise containers seem to suffer from the same problem as Nginx -- they easily let you configure client certificates for the whole site. It should in principle be possible to create a more granular setup with only parts of the site requiring certificates, but this seems to be tricky.
 
 ## License
 

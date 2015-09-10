@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 ENV DOMAIN_NAME=my.domain
 
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y apache2 mailutils libapache2-mod-php5 wget
+    DEBIAN_FRONTEND=noninteractive apt-get install -y apache2 mailutils libapache2-mod-php5 php5-ldap wget
 
 # Generate a self-signed sertificate for the server
 

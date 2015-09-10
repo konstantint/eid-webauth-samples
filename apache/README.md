@@ -5,7 +5,7 @@ The contents of the directory is as follows:
 
 * `ssl-site.conf`: An example `VirtualHost` configuration block demonstrating the common SSL configuration examples.
 * `renew_crl.sh`: An example script for renewing certificate revocation lists, that must be configured via `cron` to run regularly.
-* `www/`: A set of PHP scripts useful for testing the corresponding settings. In particular, `ocsp.php` provides an example of application-level OCSP validation, and scripts under `login/*` demonstrate a possible way of implementing login/logout functionality.
+* `www/`: A set of PHP scripts useful for testing the corresponding settings. In particular, `ocsp.php` provides an example of application-level OCSP validation, `ldap.php` shows the use LDAP, and scripts under `login/*` demonstrate a possible way of implementing login/logout functionality.
 * `Dockerfile` is a configuration file for [Docker](https://docker.com/) which illustrates the commands necessary to bootstrap and configure Apache on a bare Ubuntu box.
 
 You can also use Docker to construct a reproducible environment to experiment on your own. For that first build the image:
