@@ -148,7 +148,7 @@ Finally, and most importantly, create a script that would regularly re-download 
 
 CRLs are only updated at fixed intervals, hence in the time between a certificate revocation and the re-download of the updated CRL the revoked certificate will still be considered valid by the server, which is a security risk. To avoid this problem we may directly contact the CA *each time* a certificate is being presented to the server and check the current validity status of the certificate. Such a validity confirmation can be requested using the [Open Certificate Status Protocol (OCSP)](https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol) from the [OCSP service](https://www.sk.ee/en/services/validity-confirmation-services/auth-ocsp/) provided by the CA.
 
-The benefit of this approach is apparent, as it makes all certificate validations up to date and removes the need to keep track of the CRLs. The main drawback is that the SK.ee OCSP service is not free and requires a contract. During development you may use a [test OCSP service](http://www.id.ee/index.php?id=37330) provided by the SK.
+The benefit of this approach is apparent, as it makes all certificate validations up to date and removes the need to keep track of the CRLs. The main drawback is that the SK.ee OCSP service requires a contract and although it is currently free [while in pilot use](https://www.sk.ee/en/services/validity-confirmation-services/auth-ocsp/), it might become a paid service in the future. During development you may use a [test OCSP service](http://www.id.ee/index.php?id=37330) provided by the SK.
 
 In theory, you should be able to enable OCSP by simply configuring the webserver as follows:
 
