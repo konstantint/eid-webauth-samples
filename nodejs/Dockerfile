@@ -26,10 +26,11 @@ RUN mkdir /eid && \
     rm server.csr
 
 RUN mkdir /eid/ca && cd /eid/ca && \
-    wget http://sk.ee/upload/files/JUUR-SK.PEM.cer -O JUUR.crt && \
-    wget http://sk.ee/upload/files/EECCRCA.pem.cer -O EECCRCA.crt && \
-    wget http://sk.ee/upload/files/ESTEID-SK%202007.PEM.cer -O ESTEID2007.crt && \
-    wget http://sk.ee/upload/files/ESTEID-SK%202011.pem.cer -O ESTEID2011.crt
+    wget https://sk.ee/upload/files/Juur-SK.pem.crt -O JUUR.crt && \
+    wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt -O EECCRCA.crt && \
+    wget https://sk.ee/upload/files/ESTEID-SK_2007.pem.crt -O ESTEID2007.crt && \
+    wget https://sk.ee/upload/files/ESTEID-SK_2011.pem.crt -O ESTEID2011.crt && \
+    wget https://sk.ee/upload/files/ESTEID-SK_2015.pem.crt -O ESTEID2015.crt
 
 # Download CRLs
 ADD ./renew_crl_node.sh /eid/ca/

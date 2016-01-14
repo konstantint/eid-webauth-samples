@@ -236,6 +236,7 @@ run()
 		check "http://www.sk.ee/crls/eeccrca/eeccrca.crl"
 		check "http://www.sk.ee/crls/esteid/esteid2007.crl"
 		check "http://www.sk.ee/repository/crls/esteid2011.crl"
+		check "http://www.sk.ee/crls/esteid/esteid2015.crl"
 
 		# Reload apache
 		$RELOAD_CMD || error "Failed to reload Apache";

@@ -226,6 +226,7 @@ run()
 		check "http://www.sk.ee/crls/eeccrca/eeccrca.crl" "EECCRCA.crl"
 		check "http://www.sk.ee/crls/esteid/esteid2007.crl" "ESTEID2007.crl"
 		check "http://www.sk.ee/repository/crls/esteid2011.crl" "ESTEID2011.crl"
+		check "http://www.sk.ee/crls/esteid/esteid2015.crl" "ESTEID2015.crl"
 
 		echo "Please, restart your server now"
 

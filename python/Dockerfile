@@ -17,12 +17,13 @@ RUN openssl genrsa -out /etc/ssl/private/server.key 2048 && \
     rm server.csr
 
 # Obtain CA certificates
-RUN wget http://sk.ee/upload/files/JUUR-SK.PEM.cer && \
-    wget http://sk.ee/upload/files/EECCRCA.pem.cer && \
-    wget http://sk.ee/upload/files/ESTEID-SK%202007.PEM.cer && \
-    wget http://sk.ee/upload/files/ESTEID-SK%202011.pem.cer && \
-    cat JUUR-SK.PEM.cer EECCRCA.pem.cer ESTEID-SK\ 2007.PEM.cer ESTEID-SK\ 2011.pem.cer > /etc/ssl/eid/ca.crt && \
-    rm JUUR-SK.PEM.cer EECCRCA.pem.cer ESTEID-SK\ 2007.PEM.cer ESTEID-SK\ 2011.pem.cer
+RUN wget https://sk.ee/upload/files/Juur-SK.pem.crt && \
+    wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt && \
+    wget https://sk.ee/upload/files/ESTEID-SK_2007.pem.crt && \
+    wget https://sk.ee/upload/files/ESTEID-SK_2011.pem.crt && \
+    wget https://sk.ee/upload/files/ESTEID-SK_2015.pem.crt && \
+    cat Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt > /etc/ssl/eid/ca.crt && \
+    rm Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt
 
 # Download CRLs
 RUN mkdir /etc/ssl/eid/crl

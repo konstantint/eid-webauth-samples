@@ -228,9 +228,10 @@ run()
 		check "http://www.sk.ee/crls/eeccrca/eeccrca.crl"
 		check "http://www.sk.ee/crls/esteid/esteid2007.crl"
 		check "http://www.sk.ee/repository/crls/esteid2011.crl"
+		check "http://www.sk.ee/crls/esteid/esteid2015.crl"
 		
 		# Concatenate files
-		cat crl.crl eeccrca.crl esteid2007.crl esteid2011.crl > ca.crl
+		cat crl.crl eeccrca.crl esteid2007.crl esteid2011.crl esteid2015.crl > ca.crl
 
 		# Reload nginx
 		$RELOAD_CMD || error "Failed to reload Nginx";

@@ -13,12 +13,15 @@ RUN mkdir /etc/nginx/eid && \
     openssl x509 -req -days 365 -in server.csr -signkey /etc/nginx/eid/server.key -out /etc/nginx/eid/server.crt && \
     rm server.csr
 
-RUN wget http://sk.ee/upload/files/JUUR-SK.PEM.cer && \
-    wget http://sk.ee/upload/files/EECCRCA.pem.cer && \
-    wget http://sk.ee/upload/files/ESTEID-SK%202007.PEM.cer && \
-    wget http://sk.ee/upload/files/ESTEID-SK%202011.pem.cer && \
-    cat JUUR-SK.PEM.cer EECCRCA.pem.cer ESTEID-SK\ 2007.PEM.cer ESTEID-SK\ 2011.pem.cer > /etc/nginx/eid/ca.crt && \
-    rm JUUR-SK.PEM.cer EECCRCA.pem.cer ESTEID-SK\ 2007.PEM.cer ESTEID-SK\ 2011.pem.cer
+# Obtain CA certificates
+RUN wget https://sk.ee/upload/files/Juur-SK.pem.crt && \
+    wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt && \
+    wget https://sk.ee/upload/files/ESTEID-SK_2007.pem.crt && \
+    wget https://sk.ee/upload/files/ESTEID-SK_2011.pem.crt && \
+    wget https://sk.ee/upload/files/ESTEID-SK_2015.pem.crt && \
+    cat Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt > /etc/nginx/eid/ca.crt && \
+    rm Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt
+
 
 # Download CRLs
 RUN mkdir /etc/nginx/eid/crl
