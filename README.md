@@ -84,13 +84,14 @@ The configuration concepts for other servers are analogous. It is worth noting, 
 
 In order for the server to accept Estonian ID card certificates you need to configure it to trust the [corresponding root CA certificates](https://sk.ee/en/repository/certs/). Those must be first downloaded and concatenated together into a single file:
 
->     wget http://sk.ee/upload/files/JUUR-SK.PEM.cer
-    wget http://sk.ee/upload/files/EECCRCA.pem.cer
-    wget http://sk.ee/upload/files/ESTEID-SK%202007.PEM.cer
-    wget http://sk.ee/upload/files/ESTEID-SK%202011.pem.cer
-    cat JUUR-SK.PEM.cer EECCRCA.pem.cer ESTEID-SK\ 2007.PEM.cer ESTEID-SK\ 2011.pem.cer > ca.crt
-    rm JUUR-SK.PEM.cer EECCRCA.pem.cer ESTEID-SK\ 2007.PEM.cer ESTEID-SK\ 2011.pem.cer
-    # NB: this list of commands will become outdated soon.
+>     wget https://sk.ee/upload/files/Juur-SK.pem.crt
+    wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt
+    wget https://sk.ee/upload/files/ESTEID-SK_2007.pem.crt
+    wget https://sk.ee/upload/files/ESTEID-SK_2011.pem.crt
+    wget https://sk.ee/upload/files/ESTEID-SK_2015.pem.crt
+    cat Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt > ca.crt
+    rm Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt
+    # NB: this list of commands will become outdated eventually.
     # Review https://sk.ee/en/repository/certs/ to make sure you download all the necessary certificates
 
 The result is a `ca.crt` file, containing all eID root certificates concatenated. For the server to use this file it must be added to the host configuration block:
