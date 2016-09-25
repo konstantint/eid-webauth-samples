@@ -12,14 +12,10 @@ RUN mkdir /eid && cd /eid && \
 
 # Download CA certificates & convert to the Java keystore format
 RUN mkdir /eid/ca && cd /eid/ca && \
-    wget https://sk.ee/upload/files/Juur-SK.pem.crt -O JUUR.crt && \
     wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt -O EECCRCA.crt && \
-    wget https://sk.ee/upload/files/ESTEID-SK_2007.pem.crt -O ESTEID2007.crt && \
     wget https://sk.ee/upload/files/ESTEID-SK_2011.pem.crt -O ESTEID2011.crt && \
     wget https://sk.ee/upload/files/ESTEID-SK_2015.pem.crt -O ESTEID2015.crt && \
-    keytool -import -noprompt -file JUUR.crt -alias JUUR -keystore ca.jks -storepass '123456' && \
     keytool -import -noprompt -file EECCRCA.crt -alias EECCRCA -keystore ca.jks -storepass '123456' && \
-    keytool -import -noprompt -file ESTEID2007.crt -alias ESTEID2007 -keystore ca.jks -storepass '123456' && \
     keytool -import -noprompt -file ESTEID2011.crt -alias ESTEID2011 -keystore ca.jks -storepass '123456' && \
     keytool -import -noprompt -file ESTEID2015.crt -alias ESTEID2015 -keystore ca.jks -storepass '123456'
 

@@ -15,7 +15,6 @@ class OCSPVerifier {
 		$this->CERTS_DIR = "/var/www/ocsp_certs";
 
 		$this->ISSUER_CERT = Array();
-		$this->ISSUER_CERT["ESTEID-SK 2007"] = "ESTEID-SK_2007.pem";
 		$this->ISSUER_CERT["ESTEID-SK 2011"] = "ESTEID-SK_2011.pem";
 
 		$this->VAFILE = "TEST_OCSP_2011.pem";

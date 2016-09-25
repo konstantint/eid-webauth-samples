@@ -14,13 +14,11 @@ RUN mkdir /etc/nginx/eid && \
     rm server.csr
 
 # Obtain CA certificates
-RUN wget https://sk.ee/upload/files/Juur-SK.pem.crt && \
-    wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt && \
-    wget https://sk.ee/upload/files/ESTEID-SK_2007.pem.crt && \
+RUN wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt && \
     wget https://sk.ee/upload/files/ESTEID-SK_2011.pem.crt && \
     wget https://sk.ee/upload/files/ESTEID-SK_2015.pem.crt && \
-    cat Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt > /etc/nginx/eid/ca.crt && \
-    rm Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt
+    cat EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt > /etc/nginx/eid/ca.crt && \
+    rm EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt
 
 
 # Download CRLs
