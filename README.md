@@ -84,13 +84,11 @@ The configuration concepts for other servers are analogous. It is worth noting, 
 
 In order for the server to accept Estonian ID card certificates you need to configure it to trust the [corresponding root CA certificates](https://sk.ee/en/repository/certs/). Those must be first downloaded and concatenated together into a single file:
 
->     wget https://sk.ee/upload/files/Juur-SK.pem.crt
-    wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt
-    wget https://sk.ee/upload/files/ESTEID-SK_2007.pem.crt
+>     wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt
     wget https://sk.ee/upload/files/ESTEID-SK_2011.pem.crt
     wget https://sk.ee/upload/files/ESTEID-SK_2015.pem.crt
-    cat Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt > ca.crt
-    rm Juur-SK.pem.crt EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2007.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt
+    cat EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt > ca.crt
+    rm EE_Certification_Centre_Root_CA.pem.crt ESTEID-SK_2011.pem.crt ESTEID-SK_2015.pem.crt
     # NB: this list of commands will become outdated eventually.
     # Review https://sk.ee/en/repository/certs/ to make sure you download all the necessary certificates
 
@@ -120,25 +118,19 @@ Issued certificates may be revoked before their official validity end date -- th
 
 The "simple" way is based on *certificate revocation lists* (CRLs), that are regularly published by the certification authorities. To enable certificate checking against CRLs you need to first download them to a single directory:
 
->     wget http://www.sk.ee/crls/esteid/esteid2007.crl
-    wget http://www.sk.ee/crls/juur/crl.crl
-    wget http://www.sk.ee/crls/eeccrca/eeccrca.crl
+>     wget http://www.sk.ee/crls/eeccrca/eeccrca.crl
     wget http://www.sk.ee/repository/crls/esteid2011.crl
     wget http://www.sk.ee/crls/esteid/esteid2015.crl
     
 Convert them to PEM format:
 
->     openssl crl -in esteid2007.crl -out esteid2007.crl -inform DER
-    openssl crl -in crl.crl -out crl.crl -inform DER
-    openssl crl -in eeccrca.crl -out eeccrca.crl -inform DER
+>     openssl crl -in eeccrca.crl -out eeccrca.crl -inform DER
     openssl crl -in esteid2011.crl -out esteid2011.crl -inform DER
     openssl crl -in esteid2015.crl -out esteid2015.crl -inform DER
     
 Create symlinks of the form `<file hash>.r0 --> file.crl` (alternatively, you could concatenate them all into a single file):
 
->     ln -s crl.crl `openssl crl -hash -noout -in crl.crl`.r0
-    ln -s esteid2007.crl `openssl crl -hash -noout -in esteid2007.crl`.r0
-    ln -s eeccrca.crl `openssl crl -hash -noout -in eeccrca.crl`.r0
+>     ln -s eeccrca.crl `openssl crl -hash -noout -in eeccrca.crl`.r0
     ln -s esteid2011.crl `openssl crl -hash -noout -in esteid2011.crl`.r0
     ln -s esteid2015.crl `openssl crl -hash -noout -in esteid2015.crl`.r0
 

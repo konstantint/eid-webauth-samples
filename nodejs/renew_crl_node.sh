@@ -37,8 +37,8 @@
 #
 # This script is a minor modification of an original script by:
 #
-# Autor: Reigo Küngas <reigo@cvotech.com>
-# (C) Copyright 2003 Reigo Küngas; Cvo Technologies
+# Autor: Reigo Kï¿½ngas <reigo@cvotech.com>
+# (C) Copyright 2003 Reigo Kï¿½ngas; Cvo Technologies
 #
 # The original script was licensed under GPLv2.
 # it is accessible at http://id.ee/public/renew.sh
@@ -222,9 +222,7 @@ run()
 	while test -n "$DO"
 	do
 		output "Checking certs";
-		check "http://www.sk.ee/crls/juur/crl.crl" "JUUR.crl"
 		check "http://www.sk.ee/crls/eeccrca/eeccrca.crl" "EECCRCA.crl"
-		check "http://www.sk.ee/crls/esteid/esteid2007.crl" "ESTEID2007.crl"
 		check "http://www.sk.ee/repository/crls/esteid2011.crl" "ESTEID2011.crl"
 		check "http://www.sk.ee/crls/esteid/esteid2015.crl" "ESTEID2015.crl"
 

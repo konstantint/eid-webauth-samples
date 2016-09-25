@@ -26,9 +26,7 @@ RUN mkdir /eid && \
     rm server.csr
 
 RUN mkdir /eid/ca && cd /eid/ca && \
-    wget https://sk.ee/upload/files/Juur-SK.pem.crt -O JUUR.crt && \
     wget https://sk.ee/upload/files/EE_Certification_Centre_Root_CA.pem.crt -O EECCRCA.crt && \
-    wget https://sk.ee/upload/files/ESTEID-SK_2007.pem.crt -O ESTEID2007.crt && \
     wget https://sk.ee/upload/files/ESTEID-SK_2011.pem.crt -O ESTEID2011.crt && \
     wget https://sk.ee/upload/files/ESTEID-SK_2015.pem.crt -O ESTEID2015.crt
 
