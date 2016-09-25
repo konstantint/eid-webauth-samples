@@ -37,8 +37,8 @@
 #
 # This script is a minor modification of an original script by:
 #
-# Autor: Reigo K�ngas <reigo@cvotech.com>
-# (C) Copyright 2003 Reigo K�ngas; Cvo Technologies
+# Autor: Reigo Küngas <reigo@cvotech.com>
+# (C) Copyright 2003 Reigo Küngas; Cvo Technologies
 #
 # The original script was licensed under GPLv2.
 # it is accessible at http://id.ee/public/renew.sh
